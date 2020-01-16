@@ -1,0 +1,16 @@
+.spots {
+    height: 200px;
+    width: 200px;
+    margin: 5px;
+    background-color: aquamarine;
+    text-align: center;
+    line-height: 200px;
+    font-size: 50px;
+}
+
+#gameContainer {
+    display: flex;
+    flex-wrap: wrap;
+    width: 645px;
+    height: 645px;
+}

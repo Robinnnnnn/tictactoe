@@ -56,26 +56,36 @@ const GameLogic = (function () {
                 if (moveTracker % 2 == 0 && event.target.textContent == "") {
                     event.target.textContent = player1.playerMark;
                     moveTracker++;
+                    ruleTwo();
                 } else if (moveTracker % 2 == 1 && event.target.textContent == "") {
                     event.target.textContent = player2.playerMark;
                     moveTracker++;
+                    ruleTwo();
                 } else {
                     //Will add functionality to blink red to show cant make that move
-                    console.log("ERROR Move Here Alread")
+                    console.log("ERROR - Mark Here Already")
                 }
             })
         };
+
+
     }
 
     const ruleTwo = () => {
-        let spots = Array.from(document.getElementsByClassName('spots'));
-        for (let i = 0; i < spots.length; i++) {
-            Gameboard.boardArr[i] = spots[i].textContent;
+        for (let i = 0; i < identifySpot.length; i++) {
+            Gameboard.boardArr[i] = identifySpot[i].textContent;
         }
+
     }
 
     const ruleThree = () => {
-        //How to win logic goes here
+        if (moveTracker == 8) {
+            console.log("Draw");
+            for (let i = 0; i < Gameboard.boardArr.length; i++) {
+                Gameboard.boardArr[i] == "";
+            }
+            moveTracker = 0;
+        }
 
     }
 
@@ -84,13 +94,13 @@ const GameLogic = (function () {
             ruleOne();
         },
 
-        invokeRuleTwo: function () {
-            ruleTwo();
-        },
+        invokeRuleThree: function () {
+            ruleThree();
+        }
 
     }
 
 })();
 
 GameLogic.invokeRuleOne();
-GameLogic.invokeRuleTwo();
+GameLogic.invokeRuleThree();

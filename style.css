@@ -1,3 +1,10 @@
+body{
+    background-color: rgb(13, 27, 34);
+    width: 100%;
+    justify-content: center;
+    display: flex;
+}
+
 .spots {
     height: 200px;
     width: 200px;
@@ -8,9 +15,57 @@
     font-size: 50px;
 }
 
+.mainContainer{
+    margin-top: 100px;
+    font-family: 'ZCOOL QingKe HuangYou', cursive;
+    color: cornsilk;
+}
+
+#title{
+    text-align: center;
+    font-size: 38px;
+}
+
 #gameContainer {
     display: flex;
     flex-wrap: wrap;
     width: 645px;
     height: 645px;
+}
+
+.scoreBoard {
+    display:flex;
+    width: 645px;
+    justify-content: space-around;
+    font-size: 20px;
+}
+
+.playerScore > h3 {
+    text-align: center;
+    font-family: 'ZCOOL QingKe HuangYou', cursive;
+    color: cornsilk;
+    font-size: 28px;
+}
+
+.playerScore{
+    padding: 10 10 10 10;
+    font-family: 'ZCOOL QingKe HuangYou', cursive;
+    
+}
+
+.playerScore > h1{
+    background-color: bisque;
+    padding: 15px 20px;
+    font-weight: 700;
+    border-radius: 10px;
+    color:rgb(13, 27, 34);
+}
+
+#resetButton{
+    padding: 15px 20px;
+    font-weight: 700;
+    border-radius: 10px;
+    color:rgb(13, 27, 34);
+    background-color: rgb(160, 97, 20);
+    line-height: 58px ;
 }

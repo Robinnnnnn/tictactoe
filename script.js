@@ -137,13 +137,28 @@ const GameLogic = (function () {
             currentGameTracker++;
             moveTracker = 0;
             setTimeout(clearBoard, 2000);
+            adjustScoreBoard(playersMark);
         } else {
             console.log("Player 2 Wins!");
             winsTracker++;
             currentGameTracker++;
             moveTracker = 0;
             setTimeout(clearBoard, 1200);
+            adjustScoreBoard(playersMark);
         }
+    }
+
+    //adjusts the score of the game
+    const adjustScoreBoard = (playersMark) => {
+        const playerOneBoard = document.getElementById('score1');
+        const playerTwoBoard = document.getElementById('score2');
+
+        if (playersMark === "X") {
+            playerOneBoard.textContent = parseInt(playerOneBoard.textContent) + 1;
+        } else {
+            playerTwoBoard.textContent = parseInt(playerOneBoard.textContent) + 1;
+        }
+
     }
 
     return {

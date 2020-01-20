@@ -50,6 +50,8 @@ const GameLogic = (function () {
     const identifySpot = Array.from(document.getElementsByClassName('spots'));
     let winsTracker = 0;
     let currentGameTracker = 0;
+    const playerOneBoard = document.getElementById('score1');
+    const playerTwoBoard = document.getElementById('score2');
 
     const playGame = () => {
         for (let i = 0; i < identifySpot.length; i++) {
@@ -90,7 +92,7 @@ const GameLogic = (function () {
     //clears the board on a draw, clear boardArr on draw
     const checkForDraw = () => {
         if (moveTracker > 8 && currentGameTracker == 0) {
-            console.log("draw");
+            shout("Draw! Play Again!");
             setTimeout(clearBoard, 1000);
             moveTracker = 0;
             matchArrayToBoard();
@@ -103,12 +105,12 @@ const GameLogic = (function () {
             identifySpot[i].textContent = "";
             Gameboard.boardArr[i] = "";
         }
+        moveTracker = 0;
     }
 
     // checks board for winning solutions
     const checkForWin = playersMark => {
         //start @ when movetracker = 5;
-        console.log(playersMark);
         if (moveTracker > 4) {
             if ((Gameboard.boardArr[0] === playersMark) && (Gameboard.boardArr[1] === playersMark) && (Gameboard.boardArr[2] === playersMark)) {
                 playerWins(playersMark);
@@ -132,32 +134,51 @@ const GameLogic = (function () {
 
     const playerWins = (playersMark) => {
         if (playersMark === "X") {
-            console.log("Player 1 Wins!");
+            shout("Player 1 Wins!");
             winsTracker++;
             currentGameTracker++;
             moveTracker = 0;
-            setTimeout(clearBoard, 2000);
+            setTimeout(clearBoard, 700);
             adjustScoreBoard(playersMark);
         } else {
-            console.log("Player 2 Wins!");
+            shout("Player 2 Wins!");
             winsTracker++;
             currentGameTracker++;
             moveTracker = 0;
-            setTimeout(clearBoard, 1200);
+            setTimeout(clearBoard, 700);
             adjustScoreBoard(playersMark);
         }
     }
 
     //adjusts the score of the game
     const adjustScoreBoard = (playersMark) => {
-        const playerOneBoard = document.getElementById('score1');
-        const playerTwoBoard = document.getElementById('score2');
-
         if (playersMark === "X") {
-            playerOneBoard.textContent = parseInt(playerOneBoard.textContent) + 1;
+            let newScore = parseInt(playerOneBoard.textContent) + 1
+            playerOneBoard.textContent = newScore;
         } else {
-            playerTwoBoard.textContent = parseInt(playerOneBoard.textContent) + 1;
+            let newScore = parseInt(playerTwoBoard.textContent) + 1
+            playerTwoBoard.textContent = newScore;
         }
+
+    }
+
+    //allows users to reset the game
+    const resetButtonLogic = () => {
+        let resetButton = document.getElementById('resetButton');
+        resetButton.addEventListener('click', function () {
+            clearBoard();
+        })
+    }
+
+    const shout = (word) => {
+        let shoutDiv = document.getElementById('shout');
+        shoutDiv.textContent = word;
+        shoutDiv.setAttribute('style', 'padding: 15px');
+        setTimeout(function () {
+            shoutDiv.textContent = "";
+            shoutDiv.setAttribute('style', 'padding: 0');
+        }, 2500);
+
 
     }
 
@@ -166,8 +187,13 @@ const GameLogic = (function () {
             playGame();
         },
 
+        addResetLogic: function () {
+            resetButtonLogic();
+        }
+
     }
 
 })();
 
 GameLogic.invokePlayGame();
+GameLogic.addResetLogic();
